@@ -229,6 +229,6 @@ export const bed = (c, status) => art(`beds/${c.key}-${POSE[status] ?? "idle"}.p
 // and so does 16.
 export const head = (c, size = 32) => art(`cast/${c.key}-head.png`, size, size);
 
-// Pied Piper's own sign, 24px: the home folder's space hangs it. Every other
-// space's sign is its initial (spaces.js).
+// Pied Piper's own sign, 24px: the home folder's space and the personal one
+// (~/personal) hang it. Every other space's sign is its initial (spaces.js).
 export const piedPiper = (size = 24) => art("world/co-piedpiper.png", size, size);

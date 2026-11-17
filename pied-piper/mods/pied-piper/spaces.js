@@ -561,9 +561,15 @@ const FALLBACK = 60000;
 // it (shared "space.colors"): one strong color per hue.
 const MARK = { ansi6: "#22a99a", ansi3: "#e3814f", ansi4: "#5b8def", ansi5: "#8b7cf6", ansi2: "#3fae6a", ansi1: "#d9649a" };
 const PALETTE = ["ansi6", "ansi3", "ansi4", "ansi5", "ansi2", "ansi1"];
-// The home folder's space is Pied Piper itself and keeps the company's sign.
+// Pied Piper itself keeps the company's sign: the home folder's space, and the
+// personal space (~/personal itself, not the folders in it), on this computer.
 const trim = (path) => (path ?? "").replace(/\/+$/, "");
-const isHome = (s) => s.name === "~" || (!s.machine && Boolean(s.folder) && trim(s.folder) === trim(home()));
+const isPiedPiper = (s) => {
+  if (s.name === "~") return true;
+  if (s.machine || !s.folder) return false;
+  const f = trim(s.folder), h = trim(home());
+  return f === h || f === `${h}/personal`;
+};
 // The first letter or digit of a space's name; of its repo or folder when the name has none (an emoji).
 function initial(w, g) {
   for (const s of [w.name, g?.name, base(w.folder ?? "")]) {
@@ -1286,7 +1292,7 @@ export default class Spaces {
     const color = this.colors[w.id] ?? "ansi6";
     const fill = color.startsWith("#") ? color : (MARK[color] ?? t[color]);
     // 22px is the font's pixels at the art's size.
-    const sign = isHome(w) ? piedPiper()
+    const sign = isPiedPiper(w) ? piedPiper()
       : h_flex().size(24).flex_none().bg(fill).items_center().justify_center().text_size(22).line_height("24px").text_color("#ffffff").child(initial(w, g));
     return v_flex()
       .relative()
@@ -1388,7 +1394,7 @@ export default class Spaces {
     if (collapsed) this.onPlate.clear();
     this.covered = this.onPlate.size > 0;
     this.readAgents();
-    // Every space but home has a color: the least used one.
+    // Every space but Pied Piper's has a color: the least used one.
     const sp = spaces();
     const ids = new Set(sp.map((p) => p.id));
     const old = shared("space.colors") ?? {};
@@ -1396,7 +1402,7 @@ export default class Spaces {
     // An empty list right after a start is not every space having closed.
     let changed = sp.length > 0 && Object.keys(kept).length !== Object.keys(old).length;
     for (const p of sp) {
-      if (kept[p.id] || isHome(p)) continue;
+      if (kept[p.id] || isPiedPiper(p)) continue;
       const uses = (c) => Object.values(kept).filter((v) => v === c).length;
       kept[p.id] = PALETTE.reduce((best, c) => (uses(c) < uses(best) ? c : best));
       changed = true;
