@@ -1,0 +1,210 @@
+{
+  "id": "root",
+  "type": "row",
+  "children": [
+    {
+      "id": "sidebar",
+      "type": "column",
+      "children": [
+        {
+          "id": "brand",
+          "type": "block",
+          "content": {
+            "mod": "pied-piper",
+            "props": {
+              "role": "brand"
+            }
+          },
+          "size": {
+            "px": 112
+          },
+          "window_drag": true
+        },
+        {
+          "id": "sidebar-lists",
+          "type": "column",
+          "children": [
+            {
+              "id": "priority",
+              "type": "block",
+              "content": {
+                "mod": "pied-piper",
+                "props": {
+                  "role": "spaces",
+                  "list": "priority"
+                }
+              },
+              "size": {
+                "weight": 1
+              },
+              "min": 90
+            },
+            {
+              "id": "inactive",
+              "type": "block",
+              "content": {
+                "mod": "pied-piper",
+                "props": {
+                  "role": "spaces",
+                  "list": "inactive"
+                }
+              },
+              "size": {
+                "weight": 1
+              },
+              "min": 90
+            }
+          ]
+        },
+        {
+          "id": "sidebar-footer",
+          "type": "block",
+          "content": {
+            "mod": "pied-piper",
+            "props": {
+              "role": "footer"
+            }
+          },
+          "size": {
+            "px": 28
+          }
+        }
+      ],
+      "size": {
+        "px": 480
+      },
+      "min": 44,
+      "max": 480,
+      "background": "chrome",
+      "resizable": false
+    },
+    {
+      "id": "work",
+      "type": "column",
+      "children": [
+        {
+          "id": "tabs",
+          "type": "block",
+          "content": {
+            "mod": "pied-piper",
+            "props": {
+              "role": "tabs"
+            }
+          },
+          "size": {
+            "px": 112
+          },
+          "window_drag": true
+        },
+        {
+          "id": "work-body",
+          "type": "row",
+          "children": [
+            {
+              "id": "main",
+              "type": "block",
+              "content": {
+                "tab": "active",
+                "pane": {
+                  "header": {
+                    "content": {
+                      "mod": "pied-piper",
+                      "props": {
+                        "role": "pane"
+                      }
+                    },
+                    "reveal": "always",
+                    "height": 33,
+                    "position": "top"
+                  },
+                  "background": {
+                    "image": "mods/pied-piper/world/watermark.png",
+                    "fit": "cover"
+                  },
+                  "border": {
+                    "width": 1,
+                    "color": "border"
+                  },
+                  "focus": {
+                    "width": 1,
+                    "color": "border"
+                  },
+                  "radius": 0,
+                  "gap": 8,
+                  "lone": true
+                }
+              }
+            },
+            {
+              "id": "panel",
+              "type": "column",
+              "children": [
+                {
+                  "id": "panel-body",
+                  "type": "stack",
+                  "children": [
+                    {
+                      "id": "files",
+                      "type": "block",
+                      "content": {
+                        "mod": "files"
+                      }
+                    },
+                    {
+                      "id": "changes",
+                      "type": "block",
+                      "content": {
+                        "mod": "changes"
+                      }
+                    }
+                  ],
+                  "active": "files"
+                }
+              ],
+              "size": {
+                "px": 368
+              },
+              "min": 280,
+              "max": 900,
+              "hidden": true
+            }
+          ],
+          "padding": 8,
+          "gap": 8
+        },
+        {
+          "id": "status",
+          "type": "block",
+          "content": {
+            "mod": "pied-piper",
+            "props": {
+              "role": "status"
+            }
+          },
+          "size": {
+            "px": 28
+          }
+        }
+      ],
+      "resizable": false
+    }
+  ],
+  "background": "canvas",
+  "terminal_padding": [
+    14,
+    12
+  ],
+  "divider": {
+    "width": 1,
+    "color": "border"
+  },
+  "titlebar": "none",
+  "traffic_lights": [
+    12,
+    16
+  ],
+  "theme": "pied-piper",
+  "toast": "pied-piper",
+  "preview": "layouts/pied-piper.png",
+  "terminal_opacity": 0.7
+}
